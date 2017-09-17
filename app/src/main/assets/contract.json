@@ -1,0 +1,88 @@
+{
+  "resourceType": "Contract",
+  "id": "sample-consent",
+  "type": {
+    "coding": [{
+      "code": "consent",
+      "system": "http://hl7.org/fhir/contracttypecodes"
+    }]
+  },
+  "issued": "2016-08-17",
+  "applies": {
+    "start": "2016-08-17"
+  },
+  "authority": [{
+    "reference": "#bch"
+  }],
+  "subject": [{
+    "reference": "#eligibility"
+  }],
+  "term": [
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Overview"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "htmlContent",
+          "valueString": "<p>Today’s mobile devices (especially smartphones) are powerful ways to communicate new information to medical researchers. For this study, researchers at Boston Children’s Hospital are asking people with hepatitis&nbsp;C to make use of their smartphones to help report information about themselves that may improve how hepatitis&nbsp;C is treated.</p>"
+        }]
+      }],
+      "text": "This simple walkthrough will help you to understand the study and give you the opportunity to consent to participate."
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Withdrawing"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Withdrawing"
+        },
+          {
+            "url": "htmlContent",
+            "valueString": "<p>If you start the research study but later do not wish to participate, you can use the “<i>Leave Study</i>” link in the Profile section of the app. You may choose to leave the study at any time, but this action cannot be undone.</p><p>The study investigators may also withdraw you from the study without your consent at any time for any reason, including if the study is cancelled.</p>"
+          }]
+      }],
+      "text": "You may withdraw your consent and discontinue participation at any time."
+    }
+  ],
+  "contained": [
+    {
+      "resourceType": "Organization",
+      "id": "bch",
+      "name": "Cool App Team"
+    },
+    {
+      "resourceType": "Group",
+      "id": "eligibility",
+      "type": "person",
+      "actual": false,
+      "characteristic": [
+        {
+          "code": {
+            "text": "Are you 18 years of age or older?"
+          },
+          "valueBoolean": true,
+          "exclude": false
+        },
+        {
+          "code": {
+            "text": "Have you been diagnosed with XYZ?"
+          },
+          "valueBoolean": true,
+          "exclude": false
+        }
+      ]
+    }
+  ]
+}
+
