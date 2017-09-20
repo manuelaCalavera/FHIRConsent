@@ -12,10 +12,7 @@
     "start": "2016-08-17"
   },
   "authority": [{
-    "reference": "#bch"
-  }],
-  "subject": [{
-    "reference": "#eligibility"
+    "reference": "#USZ"
   }],
   "term": [
     {
@@ -29,10 +26,10 @@
         "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
         "extension": [{
           "url": "htmlContent",
-          "valueString": "<p>Today’s mobile devices (especially smartphones) are powerful ways to communicate new information to medical researchers. For this study, researchers at Boston Children’s Hospital are asking people with hepatitis&nbsp;C to make use of their smartphones to help report information about themselves that may improve how hepatitis&nbsp;C is treated.</p>"
+          "valueString": "<p>Die Verfügbarkeit von zusätzlichem Probenmaterial, das speziell für Forschungszwecke entnommen wurde, eröffnet uns weitere Forschungsmöglichkeiten. Wir bitten Sie daher, der <b>zusätzlichen</b> Entnahme von $probenentnahme$ zuzustimmen. Die Probe wird in der Biobank der $institution$ aufbewahrt und ausschliesslich für Forschungszwecke verwendet. Die Proben sind im gleichen Masse geschützt, wie dies für die Weiterverwendung im Aufklärungsblatt Version 2.0 vom 5.12.2016 beschrieben ist. Es gelten die gleichen dort aufgeführten Rechte und Bestimmungen. Die Biobank wird nach allgemein geltenden Regelungen geführt, die im Biobankenreglement festgehalten sind.</p>"
         }]
       }],
-      "text": "This simple walkthrough will help you to understand the study and give you the opportunity to consent to participate."
+      "text": "Vielen Dank, dass Sie sich bereit erklären, eine zusätzliche Entnahme von $probenentnahme$ für die Forschung zur Verfügung zu stellen. In wenigen Schritten möchten wir Sie aufklären und werden Sie dann auffordern, die Einwilligungserklärung zu unterschreiben."
     },
     {
       "type": {
@@ -45,43 +42,21 @@
         "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
         "extension": [{
           "url": "title",
-          "valueString": "Withdrawing"
+          "valueString": "Widerruf"
         },
           {
             "url": "htmlContent",
-            "valueString": "<p>If you start the research study but later do not wish to participate, you can use the “<i>Leave Study</i>” link in the Profile section of the app. You may choose to leave the study at any time, but this action cannot be undone.</p><p>The study investigators may also withdraw you from the study without your consent at any time for any reason, including if the study is cancelled.</p>"
+            "valueString": "<p>Ihre Einwilligung ist freiwillig. Es entstehen Ihnen keinerlei Nachteile, wenn Sie die zusätliche Probenentnahme ablehnen. Sie haben jederzeit das Recht, Ihre Einwilligung ohne Begründung zurückzuziehen <b>(Widerruf)</b>. Wenden Sie sich hierfür bitte an unsere Klinik. Bei einem Widerruf wird die erwähnte Probe vernichtet.</p>"
           }]
       }],
-      "text": "You may withdraw your consent and discontinue participation at any time."
+      "text": "Ihre Teilnahme ist freiwillig. Sie dürfen Ihre Einwilligung jederzeit zurückziehen (Wiederruf)."
     }
   ],
   "contained": [
     {
       "resourceType": "Organization",
-      "id": "bch",
-      "name": "Cool App Team"
-    },
-    {
-      "resourceType": "Group",
-      "id": "eligibility",
-      "type": "person",
-      "actual": false,
-      "characteristic": [
-        {
-          "code": {
-            "text": "Are you 18 years of age or older?"
-          },
-          "valueBoolean": true,
-          "exclude": false
-        },
-        {
-          "code": {
-            "text": "Have you been diagnosed with XYZ?"
-          },
-          "valueBoolean": true,
-          "exclude": false
-        }
-      ]
+      "id": "USZ",
+      "name": "Universitätsspital Zürich"
     }
   ]
 }

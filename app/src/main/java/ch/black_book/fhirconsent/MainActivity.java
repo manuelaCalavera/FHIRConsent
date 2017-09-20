@@ -1,10 +1,15 @@
 package ch.black_book.fhirconsent;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -20,12 +25,16 @@ import android.widget.ImageView;
 
 import org.hl7.fhir.dstu3.model.Contract;
 import org.researchstack.backbone.ResourcePathManager;
+import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.result.TaskResult;
 import org.researchstack.skin.task.ConsentTask;
+
+import java.util.Date;
 
 import ch.usz.c3pro.c3_pro_android_framework.consent.ViewConsentTaskActivity;
 import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.Pyro;
 import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.logic.consent.ConsentTaskOptions;
+import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.logic.consent.ContractAsTask;
 import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.logic.consent.CreateConsentPDF;
 
 public class MainActivity extends AppCompatActivity {
@@ -89,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.N)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request it is that we're responding to
@@ -101,7 +111,29 @@ public class MainActivity extends AppCompatActivity {
 
                 // create consent pdf
 
-                CreateConsentPDF.createPDFfromHTML(this, "<h1>yay</h1><br>yoyo", result, Environment.getExternalStorageDirectory()+"/consent.pdf");
+                StepResult nameResult = (StepResult) result.getStepResult(ContractAsTask.ID_FORM).getResultForIdentifier(ContractAsTask.ID_FORM_NAME);
+                String name = (String) nameResult.getResult();
+
+
+                StepResult dobResult = (StepResult) result.getStepResult(ContractAsTask.ID_FORM).getResultForIdentifier(ContractAsTask.ID_FORM_DOB);
+                Date dob = new Date((long) dobResult.getResult());
+                DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+                String birthday = formatter.format(dob);
+
+                Date now = Calendar.getInstance().getTime();
+                String today = formatter.format(now);
+
+                String contractString = ResourcePathManager.getResourceAsString(getApplicationContext(), "html/consentPDFcontent.html");
+                contractString = contractString.replace("$probenentnahme$", "Testprobe");
+                contractString = contractString.replace("$institution$", "USZ");
+                contractString = contractString.replace("$name$", name);
+                contractString = contractString.replace("$dob$", birthday);
+                contractString = contractString.replace("$datum$", birthday);
+
+
+
+
+                CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory()+"/consent.pdf");
 
             }
         }
