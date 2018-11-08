@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,6 +26,8 @@ import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.result.TaskResult;
 import org.researchstack.skin.task.ConsentTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import ch.usz.c3pro.c3_pro_android_framework.consent.ViewConsentTaskActivity;
@@ -117,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
                 StepResult dobResult = (StepResult) result.getStepResult(ContractAsTask.ID_FORM).getResultForIdentifier(ContractAsTask.ID_FORM_DOB);
                 Date dob = new Date((long) dobResult.getResult());
-                DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");
                 String birthday = formatter.format(dob);
 
                 Date now = Calendar.getInstance().getTime();
