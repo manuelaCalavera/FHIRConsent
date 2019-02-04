@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
                 StepResult nameResult = (StepResult) result.getStepResult(ContractAsTask.ID_FORM).getResultForIdentifier(ContractAsTask.ID_FORM_NAME);
                 String name = (String) nameResult.getResult();
-                
+
                 StepResult dobResult = (StepResult) result.getStepResult(ContractAsTask.ID_FORM).getResultForIdentifier(ContractAsTask.ID_FORM_DOB);
                 Date dob = new Date((long) dobResult.getResult());
                 SimpleDateFormat formatter = new SimpleDateFormat("dd.mm.yyyy");

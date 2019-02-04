@@ -67,8 +67,8 @@
     </string>
 
     <!-- Consent doc step -->
-    <string name="rsb_consent_review_title">Review</string>
-    <string name="rsb_consent_review_alert_title">Review</string>
+    <string name="rsb_consent_review_title">Überblick</string>
+    <string name="rsb_consent_review_alert_title">Überblick</string>
     <string name="rsb_consent_review_reason">Mit Ihrer Zustimmung bestätigen Sie, dass Sie die Imformationen gelesen haben und an der Studie teilnehmen wollen.</string>
     <string name="rsb_consent_review_instruction">Überprüfen Sie nochmals alle Informationen und klicken Sie zustimmen wenn Sie weiterfahren möchten.</string>
     <string name="rsb_consent_review_cancel">Abbrechen</string>
@@ -90,14 +90,14 @@
     <string name="rsb_quiz">Quiz</string>
     <string name="rsb_quiz_evaluation">Quiz Evaluation</string>
     <string name="rsb_quiz_evaluation_try_again">Nochmals versuchen</string>
-    <string name="rsb_quiz_evaluation_review_consent">Konsent Review</string>
+    <string name="rsb_quiz_evaluation_review_consent">Konsent Übersicht</string>
     <string name="rsb_quiz_evaluation_retake">Quiz neu starten</string>
     <string name="rsb_quiz_evaluation_great_job">Toll gemacht!</string>
 
     <!-- Other -->
     <string name="rsb_submit">Abschicken</string>
     <string name="rsb_exit">Beenden</string>
-    <string name="rsb_get_started">Los legen</string>
+    <string name="rsb_get_started">Loslegen</string>
     <string name="rsb_done">Fertig</string>
     <string name="rsb_step_skip">Überspringen</string>
     <string name="rsb_next">weiter</string>
@@ -151,11 +151,11 @@
 
     <!-- AssetVideoView -->
     <!-- Title for error alert when a video cannot be played.  it can be used by any app. -->
-    <string name="rsb_error_assetvideoview_title">Video problem</string>
+    <string name="rsb_error_assetvideoview_title">Problem mit Video</string>
     <!-- Text for error alert when a video container is not valid for progressive download/playback. -->
-    <string name="rsb_error_assetvideoview_invalid_progressive_playback">This video isn\'t valid for streaming to this device.</string>
+    <string name="rsb_error_assetvideoview_invalid_progressive_playback">Das Video kann auf diesem Gerät nicht abgespielt werden.</string>
     <!-- Text for error alert when a video cannot be played. it can be used by any app. -->
-    <string name="rsb_error_assetvideoview_unknown">Can\'t play this video.</string>
+    <string name="rsb_error_assetvideoview_unknown">Das Video kann nicht abgespielt werden.</string>
     <!-- Button to close error alert when a video cannot be played -->
     <string name="rsb_error_assetvideoview_button">OK</string>
 </resources>
