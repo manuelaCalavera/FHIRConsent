@@ -4,8 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,18 +13,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import org.hl7.fhir.dstu3.model.Contract;
 import org.researchstack.backbone.ResourcePathManager;
-import org.researchstack.backbone.result.StepResult;
 import org.researchstack.backbone.result.TaskResult;
-import org.researchstack.skin.task.ConsentTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,7 +33,6 @@ import ch.black_book.fhirconsent.LabelReader.PatientRecord;
 import ch.usz.c3pro.c3_pro_android_framework.consent.ViewConsentTaskActivity;
 import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.Pyro;
 import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.logic.consent.ConsentTaskOptions;
-import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.logic.consent.ContractAsTask;
 import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.logic.consent.CreateConsentPDF;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,8 +42,22 @@ public class MainActivity extends AppCompatActivity {
     private static int GET_CONSENT = 1;
     private static int RC_OCR_CAPTURE = 2;
     private static int CHECK_INFO = 3;
+    private static int FINAL_SCREEN = 4;
     private ConsentTaskOptions consentTaskOptions;
     private PatientRecord patientRecord;
+
+    private FloatingActionButton fab;
+    private FloatingActionButton fab1;
+    private FloatingActionButton fab2;
+    private FloatingActionButton fab3;
+
+    private LinearLayout layout_fab1;
+    private LinearLayout layout_fab2;
+    private LinearLayout layout_fab3;
+
+    private boolean isFABOpen;
+
+    private String probenTyp = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,14 +118,51 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab1 = (FloatingActionButton) findViewById(R.id.fab_testprobe1);
+        fab2 = (FloatingActionButton) findViewById(R.id.fab_testprobe2);
+        fab3 = (FloatingActionButton) findViewById(R.id.fab_testprobe3);
+
+        layout_fab1 = (LinearLayout) findViewById(R.id._layout_fab_testprobe1);
+        layout_fab2 = (LinearLayout) findViewById(R.id._layout_fab_testprobe2);
+        layout_fab3 = (LinearLayout) findViewById(R.id._layout_fab_testprobe3);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-               readLabel();
+                if (!isFABOpen) {
+                    showFABMenu();
+                } else {
+                    closeFABMenu();
+                }
             }
         });
+
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                probenTyp = "Testprobe 1";
+                closeFABMenu();
+                readLabel();
+            }
+        });
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                probenTyp = "Testprobe 2";
+                closeFABMenu();
+                readLabel();
+            }
+        });
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                probenTyp = "Testprobe 3";
+                closeFABMenu();
+                readLabel();
+            }
+        });
+
 
     }
 
@@ -126,15 +173,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == GET_CONSENT) {
             if (resultCode == RESULT_OK) {
 
-                // write signature to view
+                // create the PDF
                 TaskResult result = (TaskResult) data.getSerializableExtra(ViewConsentTaskActivity.EXTRA_TASK_RESULT);
-                writeSignatureToView(result);
-
                 createPDF(result);
-
+                finalScreen();
             }
         }
-        if (requestCode == RC_OCR_CAPTURE){
+        if (requestCode == RC_OCR_CAPTURE) {
             Log.d(logTag, "BOTH MATCHED: request code matched");
             if (resultCode == RESULT_OK) {
                 Log.d(logTag, "BOTH MATCHED: result ok");
@@ -147,12 +192,12 @@ public class MainActivity extends AppCompatActivity {
                 rec.DateString = data.getStringExtra("DOB");
                 Log.d(logTag, "I received the patient from OCR_CAPTURE!");
                 patientRecord = rec;
-                Log.d(logTag, patientRecord.FirstName+" "+patientRecord.LastName+" "+patientRecord.DateString+" "+patientRecord.Code);
+                Log.d(logTag, patientRecord.FirstName + " " + patientRecord.LastName + " " + patientRecord.DateString + " " + patientRecord.Code);
 
                 checkInfo();
             }
         }
-        if (requestCode == CHECK_INFO){
+        if (requestCode == CHECK_INFO) {
             if (resultCode == RESULT_OK) {
 
                 PatientRecord rec = new PatientRecord();
@@ -163,33 +208,11 @@ public class MainActivity extends AppCompatActivity {
                 rec.DateString = data.getStringExtra("DOB");
                 patientRecord = rec;
                 Log.d(logTag, "I checked the patient!");
-                Log.d(logTag, patientRecord.FirstName+" "+patientRecord.LastName+" "+patientRecord.DateString+" "+patientRecord.Code);
+                Log.d(logTag, patientRecord.FirstName + " " + patientRecord.LastName + " " + patientRecord.DateString + " " + patientRecord.Code);
 
                 startConsent();
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void createPDF(TaskResult result) {
@@ -207,19 +230,24 @@ public class MainActivity extends AppCompatActivity {
         contractString = contractString.replace("$datum$", today);
 
 
-        CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory()+"/consent.pdf");
+        CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory() + "/consent.pdf");
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "PDF gespeichert!",
+                Toast.LENGTH_LONG);
+
+        toast.show();
     }
 
-    private void readLabel(){
-        Intent intent = new Intent (this, OcrCaptureActivity.class);
+    private void readLabel() {
+        Intent intent = new Intent(this, OcrCaptureActivity.class);
         intent.putExtra(OcrCaptureActivity.AutoFocus, true);
         intent.putExtra(OcrCaptureActivity.UseFlash, false);
 
         startActivityForResult(intent, RC_OCR_CAPTURE);
     }
 
-    private void checkInfo(){
-        Intent intent = new Intent (this, CheckInfoActivity.class);
+    private void checkInfo() {
+        Intent intent = new Intent(this, CheckInfoActivity.class);
         intent.putExtra("FIRST_NAME", patientRecord.FirstName);
         intent.putExtra("LAST_NAME", patientRecord.LastName);
         intent.putExtra("CODE", patientRecord.Code);
@@ -230,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startConsent() {
         String contractString = ResourcePathManager.getResourceAsString(getApplicationContext(), contractFilePath);
-        contractString = contractString.replace("$probenentnahme$", "Testprobe");
+        contractString = contractString.replace("$probenentnahme$", probenTyp);
         contractString = contractString.replace("$institution$", "USZ");
         final Contract contract = Pyro.getFhirContext().newJsonParser().parseResource(Contract.class, contractString);
 
@@ -245,14 +273,19 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, GET_CONSENT);
     }
 
-    private void writeSignatureToView(TaskResult result) {
+    private void finalScreen() {
+        Intent intent = new Intent(this, FinalActivity.class);
+        startActivityForResult(intent, FINAL_SCREEN);
+    }
+
+    /*private void writeSignatureToView(TaskResult result) {
         String signatureEncodeBase64 = (String) result.getStepResult(ConsentTask.ID_SIGNATURE).getResultForIdentifier("ConsentSignatureStep.Signature");
 
         byte[] decodedString = Base64.decode(signatureEncodeBase64, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         ImageView signatureView = (ImageView) findViewById(R.id.signature_view);
         signatureView.setImageBitmap(decodedByte);
-    }
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -290,5 +323,38 @@ public class MainActivity extends AppCompatActivity {
             // other 'case' lines to check for other
             // permissions this app might request
         }
+    }
+
+    private void showFABMenu() {
+        isFABOpen = true;
+
+        Animation showButton = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_button);
+        fab.startAnimation(showButton);
+
+        Animation showLayout1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_layout1);
+        Animation showLayout2 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_layout2);
+        Animation showLayout3 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_layout3);
+        layout_fab1.startAnimation(showLayout1);
+        layout_fab2.startAnimation(showLayout2);
+        layout_fab3.startAnimation(showLayout3);
+        layout_fab1.setVisibility(View.VISIBLE);
+        layout_fab2.setVisibility(View.VISIBLE);
+        layout_fab3.setVisibility(View.VISIBLE);
+
+    }
+
+    private void closeFABMenu() {
+        isFABOpen = false;
+
+        Animation hideButton = AnimationUtils.loadAnimation(MainActivity.this, R.anim.hide_button);
+        fab.startAnimation(hideButton);
+
+        Animation hideLayout = AnimationUtils.loadAnimation(MainActivity.this, R.anim.hide_layout);
+        layout_fab1.startAnimation(hideLayout);
+        layout_fab2.startAnimation(hideLayout);
+        layout_fab3.startAnimation(hideLayout);
+        layout_fab1.setVisibility(View.GONE);
+        layout_fab2.setVisibility(View.GONE);
+        layout_fab3.setVisibility(View.GONE);
     }
 }

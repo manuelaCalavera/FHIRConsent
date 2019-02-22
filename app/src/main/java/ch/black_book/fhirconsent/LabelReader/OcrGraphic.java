@@ -20,7 +20,7 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
 
     private int mId;
 
-    private static final int TEXT_COLOR = Color.WHITE;
+    private static final int TEXT_COLOR = Color.BLUE;
 
     private static Paint sRectPaint;
     private static Paint sTextPaint;
