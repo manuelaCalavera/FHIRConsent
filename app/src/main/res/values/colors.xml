@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimary">#1976D2</color>
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="colorAccent">#607D8B</color>
@@ -8,4 +8,10 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
+
+    <color name="rss_one_time_color">#3f51b5</color>
+    <color name="rss_recurring_color">#1976D2</color>
+    <color name="rss_teal">#1976D2</color>
+    <color name="rss_black_60">#1976D2</color>
+    <color name="rss_snackbar_action_color">#1d92f4</color>
 </resources>

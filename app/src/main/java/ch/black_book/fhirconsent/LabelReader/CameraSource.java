@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 // Note: This requires Google Play Services 8.1 or higher, due to using indirect byte buffers for
-// storing images.
+// storing png.
 
 /**
  * Manages the camera in conjunction with an underlying
@@ -109,7 +109,7 @@ public class CameraSource {
     private int mFacing = CAMERA_FACING_BACK;
 
     /**
-     * Rotation of the device, and thus the associated preview images captured from the device.
+     * Rotation of the device, and thus the associated preview png captured from the device.
      * See {@link Frame.Metadata#getRotation()}.
      */
     private int mRotation;
@@ -159,7 +159,7 @@ public class CameraSource {
 
         /**
          * Creates a camera source builder with the supplied context and detector.  Camera preview
-         * images will be streamed to the associated detector upon starting the camera source.
+         * png will be streamed to the associated detector upon starting the camera source.
          */
         public Builder(Context context, Detector<?> detector) {
             if (context == null) {
@@ -793,7 +793,7 @@ public class CameraSource {
         //
         //   one for the frame that is currently being executed upon in doing detection
         //   one for the next pending frame to process immediately upon completing detection
-        //   two for the frames that the camera uses to populate future preview images
+        //   two for the frames that the camera uses to populate future preview png
         camera.setPreviewCallbackWithBuffer(new CameraPreviewCallback());
         camera.addCallbackBuffer(createPreviewBuffer(mPreviewSize));
         camera.addCallbackBuffer(createPreviewBuffer(mPreviewSize));
@@ -857,7 +857,7 @@ public class CameraSource {
 
     /**
      * Stores a preview size and a corresponding same-aspect-ratio picture size.  To avoid distorted
-     * preview images on some devices, the picture size must be set to a size that is the same
+     * preview png on some devices, the picture size must be set to a size that is the same
      * aspect ratio as the preview size or the preview may end up being distorted.  If the picture
      * size is null, then there is no picture size with the same aspect ratio as the preview size.
      */
@@ -890,7 +890,7 @@ public class CameraSource {
      * <p/>
      * This is necessary because even if we don't use still pictures, the still picture size must be
      * set to a size that is the same aspect ratio as the preview size we choose.  Otherwise, the
-     * preview images may be distorted on some devices.
+     * preview png may be distorted on some devices.
      */
     private static List<SizePair> generateValidPreviewSizeList(Camera camera) {
         Camera.Parameters parameters = camera.getParameters();

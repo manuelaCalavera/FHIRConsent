@@ -19,6 +19,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Base.Theme.Backbone" parent="USZTheme"/>
 
 <!--
 

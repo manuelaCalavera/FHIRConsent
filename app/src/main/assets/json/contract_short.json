@@ -1,0 +1,63 @@
+{
+  "resourceType": "Contract",
+  "id": "sample-consent",
+  "type": {
+    "coding": [{
+      "code": "consent",
+      "system": "http://hl7.org/fhir/contracttypecodes"
+    }]
+  },
+  "issued": "2016-08-17",
+  "applies": {
+    "start": "2016-08-17"
+  },
+  "authority": [{
+    "reference": "#USZ"
+  }],
+  "term": [
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Overview"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "htmlContent",
+          "valueString": "<p>Die Verfügbarkeit von zusätzlichem Probenmaterial, das speziell für Forschungszwecke entnommen wurde, eröffnet uns weitere Forschungsmöglichkeiten. Wir bitten Sie daher, der <b>zusätzlichen</b> Entnahme von $probenentnahme$ zuzustimmen. Die Probe wird in der Biobank der $institution$ aufbewahrt und ausschliesslich für Forschungszwecke verwendet. Die Proben sind im gleichen Masse geschützt, wie dies für die Weiterverwendung im Aufklärungsblatt Version 2.0 vom 5.12.2016 beschrieben ist. Es gelten die gleichen dort aufgeführten Rechte und Bestimmungen. Die Biobank wird nach allgemein geltenden Regelungen geführt, die im Biobankenreglement festgehalten sind.</p>"
+        }]
+      }],
+      "text": "Vielen Dank, dass Sie sich bereit erklären, eine zusätzliche Entnahme von $probenentnahme$ für die Forschung zur Verfügung zu stellen. In wenigen Schritten möchten wir Sie aufklären und werden Sie dann auffordern, die Einwilligungserklärung zu unterschreiben."
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Withdrawing"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Widerruf"
+        },
+          {
+            "url": "htmlContent",
+            "valueString": "<p>Ihre Einwilligung ist freiwillig. Es entstehen Ihnen keinerlei Nachteile, wenn Sie die zusätliche Probenentnahme ablehnen. Sie haben jederzeit das Recht, Ihre Einwilligung ohne Begründung zurückzuziehen <b>(Widerruf)</b>. Wenden Sie sich hierfür bitte an unsere Klinik. Bei einem Widerruf wird die erwähnte Probe vernichtet.</p>"
+          }]
+      }],
+      "text": "Ihre Teilnahme ist freiwillig. Sie dürfen Ihre Einwilligung jederzeit zurückziehen (Wiederruf)."
+    }
+  ],
+  "contained": [
+    {
+      "resourceType": "Organization",
+      "id": "USZ",
+      "name": "Universitätsspital Zürich"
+    }
+  ]
+}
+

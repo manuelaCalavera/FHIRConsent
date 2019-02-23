@@ -38,7 +38,7 @@ import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.logic.consent.CreateCons
 public class MainActivity extends AppCompatActivity {
 
     public static final String logTag = "MY_LOG";
-    private static String contractFilePath = "contract.json";
+    private static String contractFilePath = "json-dermatologie/contract.json";
     private static int GET_CONSENT = 1;
     private static int RC_OCR_CAPTURE = 2;
     private static int CHECK_INFO = 3;

@@ -9,45 +9,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
         <include layout="@layout/usz_toolbar" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Patientenetikette:"/>
+            android:text="Patientenetikette:" />
+
         <EditText
             android:id="@+id/last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/dob_picker"
-            android:clickable="true"
-            android:editable="false"
-            android:cursorVisible="false"
-            android:focusable="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></EditText>
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:editable="false"
+            android:focusable="false"></EditText>
+
         <EditText
             android:id="@+id/patient_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/confirm_info"
-            android:text="bestätigen"
+
+        <RelativeLayout
+            android:id="@+id/InnerRelativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_alignParentBottom="true">
+            <Button
+                android:id="@+id/confirm_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|end"
+                android:layout_alignParentBottom="true"
+                android:text="bestätigen" />
+        </RelativeLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
