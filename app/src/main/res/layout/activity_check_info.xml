@@ -23,17 +23,21 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
+            android:textColor="@color/colorPrimaryLight"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Patientenetikette:" />
 
         <EditText
             android:id="@+id/last_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryLight"/>
 
         <EditText
             android:id="@+id/first_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryLight"/>
 
         <EditText
             android:id="@+id/dob_picker"
@@ -42,12 +46,14 @@
             android:clickable="true"
             android:cursorVisible="false"
             android:editable="false"
-            android:focusable="false"></EditText>
+            android:focusable="false"
+            android:textColor="@color/colorPrimaryLight"/>
 
         <EditText
             android:id="@+id/patient_code"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryLight"/>
 
         <RelativeLayout
             android:id="@+id/InnerRelativeLayout"

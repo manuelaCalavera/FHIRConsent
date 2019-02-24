@@ -58,8 +58,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private GraphicOverlay<OcrGraphic> mGraphicOverlay;
 
     // Helper objects for detecting taps and pinches.
-    private ScaleGestureDetector scaleGestureDetector;
-    private GestureDetector gestureDetector;
+    //private ScaleGestureDetector scaleGestureDetector;
+    //private GestureDetector gestureDetector;
 
     /**
      * Initializes the UI and creates the detector pipeline.
@@ -85,12 +85,11 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             requestCameraPermission();
         }
 
-        gestureDetector = new GestureDetector(this, new CaptureGestureListener());
-        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
+        // no pinching/zooming
+        //gestureDetector = new GestureDetector(this, new CaptureGestureListener());
+        //scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        Snackbar.make(mGraphicOverlay, "Tap to capture. Pinch/Stretch to zoom",
-                Snackbar.LENGTH_LONG)
-                .show();
+        // Snackbar.make(mGraphicOverlay, "Tap to capture. Pinch/Stretch to zoom", Snackbar.LENGTH_LONG).show();
     }
 
     /**
@@ -125,14 +124,15 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 .show();
     }
 
-    @Override
+    // no pinching/zooming
+    /*@Override
     public boolean onTouchEvent(MotionEvent e) {
         boolean b = scaleGestureDetector.onTouchEvent(e);
 
         boolean c = gestureDetector.onTouchEvent(e);
 
         return b || c || super.onTouchEvent(e);
-    }
+    }*/
 
     /**
      * Creates and starts the camera.  Note that this uses a higher resolution in comparison
@@ -314,7 +314,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
      * @param rawY - the raw position of the tap.
      * @return true if the activity is ending.
      */
-    private boolean onTap(float rawX, float rawY) {
+    /*private boolean onTap(float rawX, float rawY) {
         OcrGraphic graphic = mGraphicOverlay.getGraphicAtLocation(rawX, rawY);
         TextBlock text = null;
         if (graphic != null) {
@@ -345,7 +345,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
     private class ScaleListener implements ScaleGestureDetector.OnScaleGestureListener {
 
-        /**
+        *//**
          * Responds to scaling events for a gesture in progress.
          * Reported by pointer motion.
          *
@@ -357,13 +357,13 @@ public final class OcrCaptureActivity extends AppCompatActivity {
          * handled. This can be useful if an application, for example,
          * only wants to update scaling factors if the change is
          * greater than 0.01.
-         */
+         *//*
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             return false;
         }
 
-        /**
+        *//**
          * Responds to the beginning of a scaling gesture. Reported by
          * new pointers going down.
          *
@@ -374,13 +374,13 @@ public final class OcrCaptureActivity extends AppCompatActivity {
          * with a focal point outside of a region where it makes
          * sense, onScaleBegin() may return false to ignore the
          * rest of the gesture.
-         */
+         *//*
         @Override
         public boolean onScaleBegin(ScaleGestureDetector detector) {
             return true;
         }
 
-        /**
+        *//**
          * Responds to the end of a scale gesture. Reported by existing
          * pointers going up.
          * <p/>
@@ -390,10 +390,10 @@ public final class OcrCaptureActivity extends AppCompatActivity {
          *
          * @param detector The detector reporting the event - use this to
          *                 retrieve extended info about event state.
-         */
+         *//*
         @Override
         public void onScaleEnd(ScaleGestureDetector detector) {
             mCameraSource.doZoom(detector.getScaleFactor());
         }
-    }
+    }*/
 }

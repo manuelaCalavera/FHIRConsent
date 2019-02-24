@@ -26,7 +26,8 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="0"
             android:text="Herzlichen Dank für Ihre Teilnahme. Bitte geben Sie nun das Gerät zurück."
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorPrimaryLight"/>
 
         <LinearLayout
             android:layout_width="match_parent"
