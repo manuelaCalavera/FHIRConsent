@@ -20,7 +20,7 @@
     <string name="app_name">FHIRConsent</string>
     <string name="action_settings">Settings</string>
 
-    <string name="c3_confirm_consent">Mit Ihrer Zustimmung bestätigen Sie, dass Sie an der Studie teilnehmen wollen.</string>
+    <string name="c3_confirm_consent">Mit Ihrer Zustimmung bestätigen Sie, dass Sie die Einwilligung unterschreiben möchten.</string>
     <string name="c3_passcode_instruction">Sie werden nun gebeten, einen Code zu wählen.\n\nDer Code schützt Ihre Daten vor unauthorisiertem Zugriff durch Dritte.</string>
 
     <string name="c3_eligibility_instruction_title">Lassen Sie uns überprüfen, ob Sie an der Studie teilnehmen können</string>
@@ -49,7 +49,7 @@
     <string name="rsb_consent_section_more_info_data_gathering">Mehr erfahren über die Datenerfassung</string>
     <string name="rsb_consent_section_more_info_data_use">Mehr erfahren über die Nutzung der Daten</string>
     <string name="rsb_consent_section_more_info_privacy">Mehr erfahren darüber, wie Ihre Privatsphäre geschützt wird</string>
-    <string name="rsb_consent_section_more_info_welcome">Mehr über die Studie erfahren</string>
+    <string name="rsb_consent_section_more_info_welcome">Mehr erfahren</string>
     <string name="rsb_consent_section_more_info_study_survey">Mehr über die Umfragen erfahren</string>
     <string name="rsb_consent_section_more_info_time_commitment">Mehr darüber erfahren, welchen Zeitaufwand die Studie verlangt</string>
     <string name="rsb_consent_section_more_info_study_tasks">Mehr über die Aufgaben erfahren</string>
@@ -67,8 +67,8 @@
     </string>
 
     <!-- Consent doc step -->
-    <string name="rsb_consent_review_title">Überblick</string>
-    <string name="rsb_consent_review_alert_title">Überblick</string>
+    <string name="rsb_consent_review_title">Zustimmung</string>
+    <string name="rsb_consent_review_alert_title">Zustimmung</string>
     <string name="rsb_consent_review_reason">Mit Ihrer Zustimmung bestätigen Sie, dass Sie die Imformationen gelesen haben und an der Studie teilnehmen wollen.</string>
     <string name="rsb_consent_review_instruction">Überprüfen Sie nochmals alle Informationen und klicken Sie zustimmen wenn Sie weiterfahren möchten.</string>
     <string name="rsb_consent_review_cancel">Abbrechen</string>

@@ -190,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                 rec.LastName = data.getStringExtra("LAST_NAME");
                 rec.Code = data.getStringExtra("CODE");
                 rec.DateString = data.getStringExtra("DOB");
+                rec.DateString = data.getStringExtra("DOB");
                 Log.d(logTag, "I received the patient from OCR_CAPTURE!");
                 patientRecord = rec;
                 Log.d(logTag, patientRecord.FirstName + " " + patientRecord.LastName + " " + patientRecord.DateString + " " + patientRecord.Code);
@@ -230,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         contractString = contractString.replace("$datum$", today);
 
 
-        CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory() + "/consent.pdf");
+        CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory() + "/consent_"+patientRecord.Code+".pdf");
         Toast toast = Toast.makeText(getApplicationContext(),
                 "PDF gespeichert!",
                 Toast.LENGTH_LONG);
