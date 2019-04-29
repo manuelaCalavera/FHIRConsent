@@ -38,26 +38,27 @@ import ch.usz.c3pro.c3_pro_android_framework.pyromaniac.logic.consent.CreateCons
 public class MainActivity extends AppCompatActivity {
 
     public static final String logTag = "MY_LOG";
-    private static String contractFilePath = "json-dermatologie/contract.json";
     private static int GET_CONSENT = 1;
     private static int RC_OCR_CAPTURE = 2;
     private static int CHECK_INFO = 3;
     private static int FINAL_SCREEN = 4;
     private ConsentTaskOptions consentTaskOptions;
+    private String contractFilePath = "json-generalconsent/contract.json";
+    private String htmlFilePath = "html";
     private PatientRecord patientRecord;
 
     private FloatingActionButton fab;
-    private FloatingActionButton fab1;
-    private FloatingActionButton fab2;
-    private FloatingActionButton fab3;
+    //private FloatingActionButton fab1;
+    //private FloatingActionButton fab2;
+    //private FloatingActionButton fab3;
 
-    private LinearLayout layout_fab1;
-    private LinearLayout layout_fab2;
-    private LinearLayout layout_fab3;
+    //private LinearLayout layout_fab1;
+    //private LinearLayout layout_fab2;
+    //private LinearLayout layout_fab3;
 
-    private boolean isFABOpen;
+    //private boolean isFABOpen;
 
-    private String probenTyp = "";
+    //private String probenTyp = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,15 +120,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab1 = (FloatingActionButton) findViewById(R.id.fab_testprobe1);
-        fab2 = (FloatingActionButton) findViewById(R.id.fab_testprobe2);
-        fab3 = (FloatingActionButton) findViewById(R.id.fab_testprobe3);
-
-        layout_fab1 = (LinearLayout) findViewById(R.id._layout_fab_testprobe1);
-        layout_fab2 = (LinearLayout) findViewById(R.id._layout_fab_testprobe2);
-        layout_fab3 = (LinearLayout) findViewById(R.id._layout_fab_testprobe3);
-
         fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readLabel();
+            }
+        });
+
+
+
+        //fab1 = (FloatingActionButton) findViewById(R.id.fab_testprobe1);
+        //fab2 = (FloatingActionButton) findViewById(R.id.fab_testprobe2);
+        //fab3 = (FloatingActionButton) findViewById(R.id.fab_testprobe3);
+
+        //layout_fab1 = (LinearLayout) findViewById(R.id._layout_fab_testprobe1);
+        //layout_fab2 = (LinearLayout) findViewById(R.id._layout_fab_testprobe2);
+        //layout_fab3 = (LinearLayout) findViewById(R.id._layout_fab_testprobe3);
+
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!isFABOpen) {
@@ -161,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 closeFABMenu();
                 readLabel();
             }
-        });
+        });*/
 
 
     }
@@ -219,9 +229,11 @@ public class MainActivity extends AppCompatActivity {
     private void createPDF(TaskResult result) {
         // create consent pdf
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         Date now = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         String today = formatter.format(now);
+        formatter = new SimpleDateFormat("yyyyMMdd");
+        String file_date = formatter.format (now);
 
         String contractString = ResourcePathManager.getResourceAsString(getApplicationContext(), "html/consentPDFcontent.html");
         contractString = contractString.replace("$probenentnahme$", "Testprobe");
@@ -230,8 +242,7 @@ public class MainActivity extends AppCompatActivity {
         contractString = contractString.replace("$dob$", patientRecord.DateString);
         contractString = contractString.replace("$datum$", today);
 
-
-        CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory() + "/consent_"+patientRecord.Code+".pdf");
+        CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory() + "/consent_"+patientRecord.Code+"_"+file_date+".pdf");
         Toast toast = Toast.makeText(getApplicationContext(),
                 "PDF gespeichert!",
                 Toast.LENGTH_LONG);
@@ -259,8 +270,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void startConsent() {
         String contractString = ResourcePathManager.getResourceAsString(getApplicationContext(), contractFilePath);
-        contractString = contractString.replace("$probenentnahme$", probenTyp);
-        contractString = contractString.replace("$institution$", "USZ");
+        //contractString = contractString.replace("$probenentnahme$", probenTyp);
+        //contractString = contractString.replace("$institution$", "USZ");
         final Contract contract = Pyro.getFhirContext().newJsonParser().parseResource(Contract.class, contractString);
 
         consentTaskOptions = new ConsentTaskOptions();
@@ -326,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void showFABMenu() {
+    /*private void showFABMenu() {
         isFABOpen = true;
 
         Animation showButton = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_button);
@@ -357,5 +368,5 @@ public class MainActivity extends AppCompatActivity {
         layout_fab1.setVisibility(View.GONE);
         layout_fab2.setVisibility(View.GONE);
         layout_fab3.setVisibility(View.GONE);
-    }
+    }*/
 }

@@ -1,6 +1,6 @@
 {
   "resourceType": "Contract",
-  "id": "dermatologie_consent",
+  "id": "dermatologie-consent",
   "type": {
     "coding": [{
       "code": "consent",
@@ -42,7 +42,7 @@
         "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
         "extension": [{
           "url": "title",
-          "valueString": "Daten"
+          "valueString": "Datensammlung"
         },
           {
             "url": "htmlContent",
@@ -82,7 +82,7 @@
         "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
         "extension": [{
           "url": "title",
-          "valueString": "Benutzung der Daten"
+          "valueString": "Nutzung der Daten"
         },
           {
             "url": "htmlContent",

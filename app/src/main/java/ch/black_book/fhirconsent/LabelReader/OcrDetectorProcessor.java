@@ -50,7 +50,7 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
         TextBlock codeBlock = null;
 
         Rect localRect = new Rect();
-        mGraphicOverlay.getLocalVisibleRect (localRect);
+        mGraphicOverlay.getLocalVisibleRect(localRect);
         mGraphicOverlay.clear();
 
         /*A bunch of image collection. Use this if scaling the image size
@@ -88,7 +88,7 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
                     + "\nitem  bot: " + item.getCornerPoints()[2].y
                     + "\nlocal bot: " + localRect.bottom);*/
 
-            if (       (item.getCornerPoints()[0].y > localRect.top)        // item is lower than top
+            if ((item.getCornerPoints()[0].y > localRect.top)        // item is lower than top
                     && (item.getCornerPoints()[2].y < localRect.bottom)     // item is higher than bottom
                     && (item.getCornerPoints()[0].x > localRect.left + 50)  // item is right of margin
                     && (item.getCornerPoints()[1].x < localRect.right - 50))// item is left of margin
@@ -122,7 +122,9 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
                         e.printStackTrace();
                         foundDob = false;
                     }
-                    dobCalendar.setTime(dob);
+                    if (dob != null) {
+                        dobCalendar.setTime(dob);
+                    }
                 }
 
                 //match with a code

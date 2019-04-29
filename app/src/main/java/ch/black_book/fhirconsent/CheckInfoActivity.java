@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -88,6 +90,15 @@ public class CheckInfoActivity extends AppCompatActivity {
         patientCode = (EditText) findViewById(R.id.patient_code);
         patientCode.setText(record.Code, TextView.BufferType.EDITABLE);
 
+        Button hideKeyboardButton = (Button) findViewById(R.id.hideKeyboard);
+        hideKeyboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout mainLayout = (LinearLayout)findViewById(R.id.checklayout);
+                InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
+            }
+        });
 
         Button confirmButton = (Button) findViewById(R.id.confirm_info);
         confirmButton.setOnClickListener(new View.OnClickListener() {

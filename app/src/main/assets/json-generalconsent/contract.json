@@ -1,0 +1,106 @@
+{
+  "resourceType": "Contract",
+  "id": "general-consent",
+  "type": {
+    "coding": [{
+      "code": "consent",
+      "system": "http://hl7.org/fhir/contracttypecodes"
+    }]
+  },
+  "issued": "2016-12-05",
+  "applies": {
+    "start": "2019-04-29"
+  },
+  "authority": [{
+    "reference": "#USZ"
+  }],
+  "term": [
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Overview"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Sehr geehrte Patientin, sehr geehrter Patient"
+        }]
+      }],
+      "text": "Im Verlauf Ihres Aufenthalts am UniversitätsSpital Zürich (USZ) werden gesundheitsbezogene Daten von Ihnen erhoben und möglicherweise auch biologische Proben Ihres Körpers gesammelt (Blut und andere Körperflüssigkeiten, Gewebeproben). Dieses biologische Material in Verbindung mit den Daten ist für die medizinische Forschung sehr wertvoll. Wir bitten Sie deshalb um Ihre Einwilligung, dieses Material und Ihre Daten für die Forschung zu nutzen."
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "DataGathering"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Ihre Einwilligug für die Forschung"
+        }]
+      }],
+      "text": "Mit Ihrer Einwilligung können Forschende Ihre Daten wissenschaftlich auswerten und Untersuchungen mit den biologischen Proben durchführen. Von der Einwilligung betroffen sind Daten aus Ihrer Krankengeschichte, zum Beispiel Resultate von klinischen, bildgebenden und laborchemischen Untersuchungen, genetische Daten (Ergebnisse aus Untersuchungen des Erbguts), aber auch Angaben zu Ihrer Person (Alter, Geschlecht), zu durchgeführten Therapien und zum Krankheitsverlauf. Bei den Proben handelt es sich um von Ihnen stammendes, bereits vorhandenes biologisches Material (Blut, Urin oder Gewebeproben), das beispielsweise für Ihre Diagnose oder Behandlung entnommen wurde und nicht weiter benötigt wird. Die Verwendung der Daten und Proben und die Weitergabe an Forschende im In- und Ausland unterliegen strengen Vorschriften.\n\nEs ist möglich, dass Sie im Verlauf Ihres Aufenthalts an unserem Spital ein weiteres Mal um eine Einwilligung für Forschungszwecke angefragt werden. Dies kann zum Beispiel dann der Fall sein, wenn die für Sie zuständige Klinik zusätzliche Proben von Ihnen für eine Biobank entnehmen möchte oder eine spezielle Fragestellung wissenschaftlich untersucht werden soll. Ihr Behandlungsteam wird Sie gegebenenfalls darüber informieren."
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Privacy"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Schutz Ihrer Daten und Proben"
+        }]
+      }],
+      "text": "Nur sehr wenige Personen sind berechtigt, die Daten Ihrer Krankengeschichte einzusehen. Diese Personen sind für Ihre Behandlung zuständig oder haben im Rahmen eines bewilligten Forschungsprojekts die Erlaubnis, Einblick in Ihre Daten zu nehmen.\n\nDaten, die für Forschungszwecke verwendet werden, müssen so bald wie möglich verschlüsselt werden, das heisst, alle Angaben, die auf Ihre Identität hinweisen – wie Name, Geburtsdatum, Versichertennummer usw. – werden durch einen Code ersetzt. Nur wer Zugang zum Schlüssel hat (Dokument, das Code und Name verbindet), kann also Rückschluss auf Ihre Person nehmen.\n\nDie biologischen Proben werden in einer Biobank sicher aufbewahrt. Eine Biobank ist eine systematische Sammlung von Proben und verknüpfbaren Daten unter klar festgelegten Bedingungen. Biologisches Material und genetische Daten dürfen ausschliesslich verschlüsselt oder anonymisiert an Forschende weitergegeben werden. Anonym bedeutet, dass sämtliche identifizierenden Angaben unkenntlich gemacht oder gelöscht werden, sodass ein Rückschluss auf Ihre Person nicht mehr möglich ist. \n\nWerden Daten und Proben in verschlüsselter Form an Forschende ausserhalb des UniversitätsSpital Zürich weitergegeben, verbleibt der Schlüssel am USZ, wo er von einer nicht am Forschungsprojekt beteiligten Stelle sicher verwahrt wird. Bei Forschung im Ausland muss gewährleistet sein, dass mindestens dieselben Anforderungen an den Datenschutz eingehalten werden wie in der Schweiz. \n\nJedes Forschungsprojekt muss zudem von der zuständigen Ethikkommission bewilligt werden. Diese überprüft, ob das Projekt und dessen Durchführung wissenschaftlich und ethisch vertretbar ist und ob die rechtlichen Bedingungen, insbesondere der Datenschutz, eingehalten werden."
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "DataUse"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Forschungsergebnisse"
+        }]
+      }],
+      "text": "Die Erkenntnisse von Forschungsprojekten mit Daten und Proben tragen meist erst für zukünftige Patientinnen und Patienten zu einer verbesserten medizinischen Betreuung bei. Sollte aber ein Ergebnis für Ihre persönliche Gesundheit relevant sein, würden Sie nach Möglichkeit informiert werden (dies ist bei Forschung mit anonymisierten Proben nicht möglich). Solche Situationen treten aber sehr selten auf.\n\nDurch die Überlassung Ihrer Daten und Proben für die Forschung entsteht kein Anspruch auf eine Beteiligung an möglichen Gewinnen, die aus den Erkenntnissen entstehen könnten. Ihnen oder Ihrer Krankenversicherung entstehen durch die Forschungsprojekte keine Kosten."
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Withdrawing"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Ihre Rechte"
+        }]
+      }],
+      "text": "Ihre Einwilligung ist freiwillig und gilt grundsätzlich unbegrenzt. Sie haben aber jederzeit das Recht, Ihre Einwilligung ohne Begründung zurückzuziehen (Widerruf). Wenden Sie sich hierfür bitte an Ihre behandelnde Klinik. Bei einem Widerruf werden Ihre Daten und Proben nicht mehr für Forschungsprojekte ausgehändigt.\n\nOb Sie sich für oder gegen eine Einwilligung entscheiden oder Ihre Einwilligung widerrufen, hat keinen Einfluss auf Ihre medizinische Betreuung.\n\nFalls Sie noch Fragen zur Weiterverwendung von Daten und Material für die Forschung haben, wenden Sie sich an Ihre behandelnde Ärztin / Ihren behandelnden Arzt oder besuchen Sie unsere Website www.usz.ch/forschung"
+    }
+  ],
+  "contained": [
+    {
+      "resourceType": "Organization",
+      "id": "USZ",
+      "name": "Universitätsspital Zürich"
+    }
+  ]
+}
