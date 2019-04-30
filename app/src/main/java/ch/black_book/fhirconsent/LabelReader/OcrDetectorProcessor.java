@@ -53,18 +53,26 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
         mGraphicOverlay.getLocalVisibleRect(localRect);
         mGraphicOverlay.clear();
 
-        /*A bunch of image collection. Use this if scaling the image size
+        //A bunch of image collection. Use this if scaling the image size
         int imgHeight = mGraphicOverlay.getHeight();
         float imgTranslationY = mGraphicOverlay.getTranslationY();
         int imgTop = mGraphicOverlay.getTop();
         int imgBot = mGraphicOverlay.getBottom();
-        Rect globRect = new Rect();
+        /*Rect globRect = new Rect();
         Point globOffset = new Point();
         int[] screenLoc = new int[2];
         int[] windowLoc = new int[2];
         mGraphicOverlay.getGlobalVisibleRect (globRect,globOffset);
         mGraphicOverlay.getLocationOnScreen(screenLoc);
         mGraphicOverlay.getLocationInWindow(windowLoc);*/
+
+        Log.d(logTag, "Graphic Overlay\n"
+                + mGraphicOverlay.mPreviewHeight + " "
+                + mGraphicOverlay.mPreviewWidth + " "
+                + mGraphicOverlay.mHeightScaleFactor + " "
+                + mGraphicOverlay.mWidthScaleFactor + " "
+                + "\nEND Graphic Overlay");
+
 
         /**
          * Checking the TextBlocks to match the USZ small patient label
@@ -82,16 +90,23 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
         for (int i = 0; i < items.size(); ++i) {
             TextBlock item = items.valueAt(i);
 
-            /*Log.d(logTag, "."
+            Log.d(logTag, "."
                     + "\nitem  top: " + item.getCornerPoints()[0].y
                     + "\nlocal top: " + localRect.top
                     + "\nitem  bot: " + item.getCornerPoints()[2].y
-                    + "\nlocal bot: " + localRect.bottom);*/
+                    + "\nlocal bot: " + localRect.bottom);
 
-            if ((item.getCornerPoints()[0].y > localRect.top)        // item is lower than top
-                    && (item.getCornerPoints()[2].y < localRect.bottom)     // item is higher than bottom
-                    && (item.getCornerPoints()[0].x > localRect.left + 50)  // item is right of margin
-                    && (item.getCornerPoints()[1].x < localRect.right - 50))// item is left of margin
+            Log.d(logTag, "."
+                    //+ "\nitem  left Trans: " + (mGraphicOverlay.getWidth() - (item.getCornerPoints()[0].x - mGraphicOverlay.mWidthScaleFactor))
+                    + "\nitem  top Trans: " + item.getCornerPoints()[0].y * mGraphicOverlay.mHeightScaleFactor
+                    + "\nlocal top Trans: " + localRect.top * mGraphicOverlay.mHeightScaleFactor
+                    + "\nitem  bot Trans: " + item.getCornerPoints()[2].y * mGraphicOverlay.mHeightScaleFactor
+                    + "\nlocal bot Trans: " + localRect.bottom * mGraphicOverlay.mHeightScaleFactor );
+
+            if (       (item.getCornerPoints()[0].y * mGraphicOverlay.mHeightScaleFactor > localRect.top)        // item is lower than top
+                    && (item.getCornerPoints()[2].y * mGraphicOverlay.mHeightScaleFactor < localRect.bottom)     // item is higher than bottom
+                    && (item.getCornerPoints()[0].x * mGraphicOverlay.mWidthScaleFactor > localRect.left + 50)  // item is right of margin
+                    && (item.getCornerPoints()[1].x * mGraphicOverlay.mWidthScaleFactor < localRect.right - 50))// item is left of margin
             {
 
                 //match with the name and DOB
