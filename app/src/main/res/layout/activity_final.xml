@@ -25,7 +25,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="0"
-            android:text="Herzlichen Dank für Ihre Teilnahme. Bitte geben Sie nun das Gerät zurück."
+            android:text="Mit der Überlassung Ihrer gesundheitsbezogenen Daten und Ihres Materials leisten Sie einen wertvollen Beitrag für die biomedizinische Forschung.\n\nWir danken Ihnen dafür herzlich.\n\nBitte geben Sie nun das Gerät zurück."
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/colorPrimaryLight"/>
 

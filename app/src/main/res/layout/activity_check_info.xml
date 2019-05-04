@@ -28,6 +28,16 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Patientenetikette:" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorPrimaryLight"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Nachname:" />
         <EditText
             android:id="@+id/last_name"
             android:layout_width="match_parent"
@@ -40,6 +50,16 @@
             android:maxLines="1"
             android:inputType="text"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorPrimaryLight"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Vorname:" />
         <EditText
             android:id="@+id/first_name"
             android:layout_width="match_parent"
@@ -51,7 +71,16 @@
             android:textColor="@color/colorPrimaryLight"
             android:maxLines="1"
             android:inputType="text"/>
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorPrimaryLight"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Geburtsdatum:" />
         <EditText
             android:id="@+id/dob_picker"
             android:layout_width="match_parent"
@@ -65,7 +94,16 @@
             android:editable="false"
             android:focusable="false"
             android:textColor="@color/colorPrimaryLight"/>
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorPrimaryLight"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Patientennummer:" />
         <EditText
             android:id="@+id/patient_code"
             android:layout_width="match_parent"
@@ -77,13 +115,6 @@
             android:textColor="@color/colorPrimaryLight"
             android:maxLines="1"
             android:inputType="text"/>
-
-        <Button
-            android:id="@+id/hideKeyboard"
-            android:layout_width="45dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="v" />
 
         <RelativeLayout
             android:id="@+id/InnerRelativeLayout"

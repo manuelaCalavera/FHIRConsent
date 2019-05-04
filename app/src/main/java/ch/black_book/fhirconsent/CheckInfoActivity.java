@@ -90,15 +90,6 @@ public class CheckInfoActivity extends AppCompatActivity {
         patientCode = (EditText) findViewById(R.id.patient_code);
         patientCode.setText(record.Code, TextView.BufferType.EDITABLE);
 
-        Button hideKeyboardButton = (Button) findViewById(R.id.hideKeyboard);
-        hideKeyboardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout mainLayout = (LinearLayout)findViewById(R.id.checklayout);
-                InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
-            }
-        });
 
         Button confirmButton = (Button) findViewById(R.id.confirm_info);
         confirmButton.setOnClickListener(new View.OnClickListener() {

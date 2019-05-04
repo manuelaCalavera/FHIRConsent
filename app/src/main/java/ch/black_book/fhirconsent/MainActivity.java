@@ -2,12 +2,18 @@ package ch.black_book.fhirconsent;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintJob;
+import android.print.PrintManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -17,16 +23,23 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import org.hl7.fhir.dstu3.model.Contract;
 import org.researchstack.backbone.ResourcePathManager;
 import org.researchstack.backbone.result.TaskResult;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import ch.black_book.fhirconsent.LabelReader.OcrCaptureActivity;
 import ch.black_book.fhirconsent.LabelReader.PatientRecord;
@@ -43,20 +56,26 @@ public class MainActivity extends AppCompatActivity {
     private static int CHECK_INFO = 3;
     private static int FINAL_SCREEN = 4;
     private ConsentTaskOptions consentTaskOptions;
-    private String contractFilePath = "json-generalconsent/contract.json";
-    private String htmlFilePath = "html";
+    private String contractFilePath = "json-appendix/contract.json";
+    private String consentPDFContent = "html-appendix/consentPDFcontent.html";
+    private String consentReviewContent = "html-appendix/consent.html";
+    private String fileFolder = "/FHIRConsent";
+    private String filePrefix = "Appendix_";
     private PatientRecord patientRecord;
+
+    private ToggleButton toggleGeneralConsent;
+    private ToggleButton toggleAppendix;
 
     private FloatingActionButton fab;
     //private FloatingActionButton fab1;
-    //private FloatingActionButton fab2;
-    //private FloatingActionButton fab3;
+    private FloatingActionButton fab2;
+    private FloatingActionButton fab3;
 
     //private LinearLayout layout_fab1;
-    //private LinearLayout layout_fab2;
-    //private LinearLayout layout_fab3;
+    private LinearLayout layout_fab2;
+    private LinearLayout layout_fab3;
 
-    //private boolean isFABOpen;
+    private boolean isFABOpen;
 
     //private String probenTyp = "";
 
@@ -119,25 +138,73 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        //create folder if not exist
+        File folder = new File(Environment.getExternalStorageDirectory() + fileFolder);
+        boolean success = true;
+        if (!folder.exists()) {
+            //Toast.makeText(MainActivity.this, "Directory Does Not Exist, Create It", Toast.LENGTH_SHORT).show();
+            success = folder.mkdir();
+        }
+
+        toggleAppendix = (ToggleButton) findViewById(R.id.toggleButtonAppendix);
+        toggleAppendix.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    toggleGeneralConsent.setChecked(false);
+                    toggleAppendix.setChecked(true);
+                    toggleAppendix.setBackgroundColor(Color.parseColor("#0077ff"));
+                    toggleGeneralConsent.setBackgroundColor(Color.parseColor("#999999"));
+                    contractFilePath = "json-appendix/contract.json";
+                    consentPDFContent = "html-appendix/consentPDFcontent.html";
+                    consentReviewContent = "html-appendix/consent.html";
+                    filePrefix = "Appendix_";
+                } else {
+                    toggleGeneralConsent.setChecked(true);
+                    toggleAppendix.setChecked(false);
+                }
+            }
+        });
+
+        toggleGeneralConsent = (ToggleButton) findViewById(R.id.toggleButtonGeneralConsent);
+        toggleGeneralConsent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    toggleAppendix.setChecked(false);
+                    toggleGeneralConsent.setChecked(true);
+                    toggleGeneralConsent.setBackgroundColor(Color.parseColor("#0077ff"));
+                    toggleAppendix.setBackgroundColor(Color.parseColor("#999999"));
+                    contractFilePath = "json-generalconsent/contract.json";
+                    consentPDFContent = "html-generalconsent/consentPDFcontent.html";
+                    consentReviewContent = "html-generalconsent/consent.html";
+                    filePrefix = "GeneralConsent_";
+                } else {
+                    toggleAppendix.setChecked(true);
+                    toggleGeneralConsent.setChecked(false);
+                }
+            }
+        });
+
+        toggleAppendix.setChecked(true);
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 readLabel();
             }
-        });
+        });*/
 
 
 
         //fab1 = (FloatingActionButton) findViewById(R.id.fab_testprobe1);
-        //fab2 = (FloatingActionButton) findViewById(R.id.fab_testprobe2);
-        //fab3 = (FloatingActionButton) findViewById(R.id.fab_testprobe3);
+        fab2 = (FloatingActionButton) findViewById(R.id.fab_testprobe2);
+        fab3 = (FloatingActionButton) findViewById(R.id.fab_testprobe3);
 
         //layout_fab1 = (LinearLayout) findViewById(R.id._layout_fab_testprobe1);
-        //layout_fab2 = (LinearLayout) findViewById(R.id._layout_fab_testprobe2);
-        //layout_fab3 = (LinearLayout) findViewById(R.id._layout_fab_testprobe3);
+        layout_fab2 = (LinearLayout) findViewById(R.id._layout_fab_testprobe2);
+        layout_fab3 = (LinearLayout) findViewById(R.id._layout_fab_testprobe3);
 
-        /*fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!isFABOpen) {
@@ -148,32 +215,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        fab1.setOnClickListener(new View.OnClickListener() {
+        /*fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                probenTyp = "Testprobe 1";
                 closeFABMenu();
                 readLabel();
             }
-        });
+        });*/
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                probenTyp = "Testprobe 2";
                 closeFABMenu();
-                readLabel();
+                startNewPatient();
             }
         });
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                probenTyp = "Testprobe 3";
                 closeFABMenu();
                 readLabel();
             }
-        });*/
-
-
+        });
     }
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -235,14 +297,16 @@ public class MainActivity extends AppCompatActivity {
         formatter = new SimpleDateFormat("yyyyMMdd");
         String file_date = formatter.format (now);
 
-        String contractString = ResourcePathManager.getResourceAsString(getApplicationContext(), "html/consentPDFcontent.html");
+        String contractString = ResourcePathManager.getResourceAsString(getApplicationContext(), consentPDFContent);
         contractString = contractString.replace("$probenentnahme$", "Testprobe");
         contractString = contractString.replace("$institution$", "USZ");
-        contractString = contractString.replace("$name$", patientRecord.FirstName + " " + patientRecord.LastName);
+        contractString = contractString.replace("$nachname$", patientRecord.LastName);
+        contractString = contractString.replace("$vorname$", patientRecord.FirstName);
         contractString = contractString.replace("$dob$", patientRecord.DateString);
+        contractString = contractString.replace("$code$", patientRecord.Code);
         contractString = contractString.replace("$datum$", today);
 
-        CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory() + "/consent_"+patientRecord.Code+"_"+file_date+".pdf");
+        CreateConsentPDF.createPDFfromHTML(this, contractString, result, Environment.getExternalStorageDirectory() + fileFolder + "/" + filePrefix + patientRecord.Code+"_"+file_date+".pdf");
         Toast toast = Toast.makeText(getApplicationContext(),
                 "PDF gespeichert!",
                 Toast.LENGTH_LONG);
@@ -268,6 +332,16 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, CHECK_INFO);
     }
 
+    private void startNewPatient() {
+        Intent intent = new Intent(this, CheckInfoActivity.class);
+        intent.putExtra("FIRST_NAME", "");
+        intent.putExtra("LAST_NAME", "");
+        intent.putExtra("CODE", "");
+        intent.putExtra("DOB", "01.01.2000");
+
+        startActivityForResult(intent, CHECK_INFO);
+    }
+
     private void startConsent() {
         String contractString = ResourcePathManager.getResourceAsString(getApplicationContext(), contractFilePath);
         //contractString = contractString.replace("$probenentnahme$", probenTyp);
@@ -277,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
         consentTaskOptions = new ConsentTaskOptions();
         consentTaskOptions.setRequiresBirthday(false);
         consentTaskOptions.setRequiresName(false);
-        consentTaskOptions.setReviewConsentDocument("consent");
+        consentTaskOptions.setReviewConsentDocument(consentReviewContent);
         consentTaskOptions.setAskForSharing(false);
 
         Intent intent = ViewConsentTaskActivity.newIntent(getApplicationContext(), contract, consentTaskOptions);
@@ -337,19 +411,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*private void showFABMenu() {
+    private void showFABMenu() {
         isFABOpen = true;
 
         Animation showButton = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_button);
         fab.startAnimation(showButton);
 
-        Animation showLayout1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_layout1);
+        //Animation showLayout1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_layout1);
         Animation showLayout2 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_layout2);
         Animation showLayout3 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.show_layout3);
-        layout_fab1.startAnimation(showLayout1);
+        //layout_fab1.startAnimation(showLayout1);
         layout_fab2.startAnimation(showLayout2);
         layout_fab3.startAnimation(showLayout3);
-        layout_fab1.setVisibility(View.VISIBLE);
+        //layout_fab1.setVisibility(View.VISIBLE);
         layout_fab2.setVisibility(View.VISIBLE);
         layout_fab3.setVisibility(View.VISIBLE);
 
@@ -362,11 +436,11 @@ public class MainActivity extends AppCompatActivity {
         fab.startAnimation(hideButton);
 
         Animation hideLayout = AnimationUtils.loadAnimation(MainActivity.this, R.anim.hide_layout);
-        layout_fab1.startAnimation(hideLayout);
+        //layout_fab1.startAnimation(hideLayout);
         layout_fab2.startAnimation(hideLayout);
         layout_fab3.startAnimation(hideLayout);
-        layout_fab1.setVisibility(View.GONE);
+        //layout_fab1.setVisibility(View.GONE);
         layout_fab2.setVisibility(View.GONE);
         layout_fab3.setVisibility(View.GONE);
-    }*/
+    }
 }

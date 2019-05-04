@@ -1,0 +1,95 @@
+{
+  "resourceType": "Contract",
+  "id": "dermatologie-consent",
+  "type": {
+    "coding": [{
+      "code": "consent",
+      "system": "http://hl7.org/fhir/contracttypecodes"
+    }]
+  },
+  "issued": "2017-10-01",
+  "applies": {
+    "start": "2019-01-01"
+  },
+  "authority": [{
+    "reference": "#USZ"
+  }],
+  "term": [
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Overview"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Information und Einwilligungserklärung zur Entnahme von biologischem Material für die Forschung"
+        }]
+      }],
+      "text": "Vielen Dank, dass Sie sich bereit erklären, eine zusätzliche Entnahme von Blut (max. 50ml) für die Forschung zur Verfügung zu stellen. In wenigen Schritten möchten wir Sie aufklären und werden Sie dann auffordern, die Einwilligungserklärung zu unterschreiben.\n\nDiese Einwilligungserklärung ist eine Ergänzung zum Aufklärungsblatt zur Weiterverwendung von biologischem Material und gesundheitsbezogenen Personendaten für die Forschung"
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "DataGathering"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Ihre Einwilligug für die Forschung"
+        }]
+      }],
+      "text": "Die Verfügbarkeit von zusätzlichem Probenmaterial, das speziell für Forschungszwecke entnommen wurde, eröffnet uns weitere Forschungsmöglichkeiten. Wir bitten Sie daher, der zusätzlichen Entnahme von Blut (max. 50ml) während einer regulären Blutentnahme bzw. der Weiterverwendung von übriggebliebenem Material zuzustimmen. Die Probe wird in der Dermatologischen Biobank des UniversitätsSpitals Zürich EK647 aufbewahrt und ausschliesslich in verschlüsselter Form für Forschungszwecke verwendet. Die Proben sind in gleichem Masse geschützt, wie dies für die Weiterverwendung in der von Ihnen unterschriebenen Version des oben erwähnten Aufklärungsblatts beschrieben ist. Es gelten die gleichen dort aufgeführten Rechte und Bestimmungen. Nur deklarierte USZ-interne Forscher der Dermatologischen Klinik dürfen auf die unverschlüsselten Patientendaten und -proben zugreifen."
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Privacy"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Schutz Ihrer Daten und Proben"
+        },
+          {
+            "url": "htmlContent",
+            "valueString": "<p>Nur sehr wenige Personen sind berechtigt, die Daten Ihrer Krankengeschichte einzusehen. Diese Personen sind f&uuml;r Ihre Behandlung zust&auml;ndig oder haben im Rahmen eines bewilligten Forschungsprojekts die Erlaubnis, Einblick in Ihre Daten zu nehmen.</p><p>Daten, die f&uuml;r Forschungszwecke verwendet werden, m&uuml;ssen so bald wie m&ouml;glich verschl&uuml;sselt werden, das heisst, alle Angaben, die auf Ihre Identit&auml;t hinweisen &ndash; wie Name, Geburtsdatum, Versichertennummer usw. &ndash; werden durch einen Code ersetzt. Nur wer Zugang zum Schl&uuml;ssel hat, kann also R&uuml;ckschluss auf Ihre Person nehmen.</p><p>Die biologischen Proben werden in einer Biobank sicher aufbewahrt. Eine Biobank ist eine systematische Sammlung von Proben und verkn&uuml;pfbaren Daten unter klar festgelegten Bedingungen. Biologisches Material und genetische Daten d&uuml;rfen ausschliesslich verschl&uuml;sselt oder anonymisiert an Forschende weitergegeben werden. Anonym bedeutet, dass s&auml;mtliche identifizierenden Angaben unkenntlich gemacht oder gel&ouml;scht werden, sodass ein R&uuml;ckschluss auf Ihre Person nicht mehr m&ouml;glich ist.</p><p>Werden Daten und Proben in verschl&uuml;sselter Form an Forschende ausserhalb des Universit&auml;tsSpital Z&uuml;rich weitergegeben, verbleibt der Schl&uuml;ssel am USZ, wo er von einer nicht am Forschungsprojekt beteiligten Stelle sicher verwahrt wird. Bei Forschung im Ausland muss gew&auml;hrleistet sein, dass mindestens dieselben Anforderungen an den Datenschutz eingehalten werden wie in der Schweiz.</p><p>Jedes Forschungsprojekt muss zudem von der zust&auml;ndigen Ethikkommission bewilligt werden. Diese &uuml;berpr&uuml;ft, ob das Projekt und dessen Durchf&uuml;hrung wissenschaftlich und ethisch vertretbar ist und ob die rechtlichen Bedingungen, insbesondere der Datenschutz, eingehalten werden.</p>"
+          }]
+      }],
+      "text": "Wie Sie dem Aufklärungsblatt entnehmen können, können die Proben in verschlüsselter Form auch an Forschende ausserhalb des USZ weitergegeben werden. Diese Forschenden können in schweizerischen oder ausländischen Institutionen wie Spitälern, Hochschulen oder Industriebetrieben wie Novartis, Roche und anderen arbeiten.\n\nDie Biobank wird nach allgemein geltenden Regelungen geführt, die im Reglement \"Dermatologische Biobank des UniversitätsSpitals Zürich, Version vom 01.10.2017\" festgehalten sind.\n\nZusätzlich ermächtige ich den behandelnden Arzt zum Aktenaustausch mit Histologielabors sowie zuweisenden und weiterbehandelnden Ärzten und entbinde diese von der ärztlichen Geheimhaltungspflicht."
+    },
+    {
+      "type": {
+        "coding": [{
+          "system": "http://researchkit.org/docs/Constants/ORKConsentSectionType",
+          "code": "Withdrawing"
+        }]
+      },
+      "extension": [{
+        "url": "http://fhir-registry.smarthealthit.org/StructureDefinition/ORKConsentSection",
+        "extension": [{
+          "url": "title",
+          "valueString": "Widerruf"
+        }]
+      }],
+      "text": "Ihre Einwilligung ist freiwillig. Es entstehen Ihnen keinerlei Nachteile, wenn Sie die zusätzliche Probenentnahme ablehnen. Sie haben jederzeit das Recht, Ihre Einwilligung ohne Begründung zurückzuziehen (Widerruf). Wenden Sie sich hierfür bitte an unsere Klinik. Bei einem Widerruf wird die erwähnte Probe vernichtet."
+    }
+  ],
+  "contained": [
+    {
+      "resourceType": "Organization",
+      "id": "USZ",
+      "name": "Universitätsspital Zürich"
+    }
+  ]
+}
+
