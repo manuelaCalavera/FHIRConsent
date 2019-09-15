@@ -4,15 +4,15 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.util.SparseArray;
 
+import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.text.TextBlock;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.text.TextBlock;
+import java.util.regex.Pattern;
 
 import static ch.black_book.fhirconsent.MainActivity.logTag;
 
@@ -167,6 +167,14 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
             }
         }
     }
+
+
+
+
+
+
+
+
 
     /**
      * Frees the resources associated with this detection processor.
